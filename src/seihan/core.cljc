@@ -29,7 +29,7 @@
   (:findings job)
   (:imposition job)
   ```"
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ---------------------------------------------------------------- limits（意図的な天井）
 
@@ -107,7 +107,7 @@
   (cond
     (and (map? c) (contains? c :spot))
     (let [s (str (:spot c))]
-      (keyword "spot" (str/replace (str/lower-case s) #"[^a-z0-9]+" "-")))
+      (keyword "spot" (str/replace (str/lower s) #"[^a-z0-9]+" "-")))
 
     (keyword? c)
     (let [ns (namespace c)
@@ -120,7 +120,7 @@
 
     (string? c)
     (let [s (str/trim c)
-          low (str/lower-case s)]
+          low (str/lower s)]
       (cond
         (contains? #{"c" "cyan" "m" "magenta" "y" "yellow" "k" "black" "key"} low)
         nil
@@ -147,8 +147,8 @@
 
     (and (string? c)
          (contains? #{"c" "cyan" "m" "magenta" "y" "yellow" "k" "black" "key"}
-                    (str/lower-case (str/trim c))))
-    (let [id (get process-aliases (keyword (str/lower-case (str/trim c))))]
+                    (str/lower (str/trim c))))
+    (let [id (get process-aliases (keyword (str/lower (str/trim c))))]
       {:id id :kind :process :label (get process-labels id)})
 
     :else
