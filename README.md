@@ -87,7 +87,7 @@ craft 兄弟であり、平面を共有しない。
 第一級の runtime は ClojureScript、JVM はテストハーネス専用。
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 ## ライセンス
